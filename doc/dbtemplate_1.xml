@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DBTemplate  serverPort="8089" isBasicAuth="true" basicUserName="u1" basicPassword="123456" serverFlag="http" >
+    <!--
+        .*(').*|.*(\b(select|insert|into|update|delete|from|where|and|or|trancate|drop|execute|like|grant|use|union|order|by)\b).*
+       -->
+    <SqlInjectFilter>
+        .*(\b(select|insert|into|update|delete|from|trancate|drop|execute|grant|use|union|order|by)\b).*
+    </SqlInjectFilter>
+    <DBSelect id="1" connId="conn_01" >
+        <Sql>
+            <![CDATA[
+                    select ${cols}
+                    from t_device_info
+                    where 1=1
+                    ${where} and d_width>30
+                    limit  ${currentPage},${pageSize}
+                 ]]>
+        </Sql>
+        <!--
+        {
+            "id":"1",
+            "method":"sel",
+            "cols":"*",
+            "where":" and d_ip like '192.168.%' ",
+
+            "pageSize":10,
+            "currentPage":0
+        }
+        -->
+    </DBSelect>
+    <DBSelect id="2" connId="conn_01" >
+        <Sql>
+            <![CDATA[
+                    select *
+                    from t_customer_info t1,t_c_d_info t2
+                    on t1.c_id=t2.cd_c_id
+                    where 1=1
+                    ${where}  ${custom_k1} ${custom_k2}
+                 ]]>
+        </Sql>
+    </DBSelect>
+    <DBInsert id="3" connId="conn_01">
+        <Sql>
+            <![CDATA[
+                  insert into t_device_info ( ${cols} ) values ( ${values} )
+                   ]]>
+        </Sql>
+        <!--
+        {
+            "id":"3",
+            "method":"ins",
+            "cols":"d_id,d_name,d_setup_address,d_ip,d_desc,d_width,d_height,d_writetime",
+            "values":"'${timestamp13}','路由器01','北京市大安小区15栋2单101室','192.168.0.110','Hx科技',20,40,'${YYYY-MM-DD hh:mm:ss}' ",
+
+        }
+        -->
+    </DBInsert>
+    <DBInsert id="4" connId="conn_01">
+        <Sql>
+            <![CDATA[
+                 insert into t_device_info (d_id,d_name,d_setup_address,d_ip ) values ('${timestamp13}', ${values} )
+                   ]]>
+        </Sql>
+    </DBInsert>
+    <DBDelete id="5" connId="conn_01">
+        <Sql>
+            <![CDATA[
+                 delete from t_device_info where 1=1 ${where}
+                   ]]>
+        </Sql>
+    </DBDelete>
+    <DBDelete id="6" connId="conn_01">
+        <Sql>
+            <![CDATA[
+                delete from t_device_info where 1=1 ${custom_k1} ${custom_k2}
+                   ]]>
+        </Sql>
+        <!--
+        {
+            "id":"6",
+            "method":"del",
+            "customKeys":"custom_k1;custom_k2",
+            "customValues":"and  d_desc='100M' ; and  d_name='路由器03' ",
+        }
+
+        -->
+    </DBDelete>
+    <DBUpdate id="7" connId="conn_01">
+        <Sql>
+            <![CDATA[
+                update t_device_info set ${custom_k1},${custom_k2} where 1=1 ${where}
+
+               ]]>
+        </Sql>
+    </DBUpdate>
+
+    <DBUpdate id="8" connId="conn_01">
+        <Sql>
+            <![CDATA[
+                update t_device_info set d_width=${custom_k1},d_desc='${custom_k2}' where 1=1 ${where}
+
+               ]]>
+        </Sql>
+        <!--
+
+        {
+            "id":"8",
+            "method":"upd",
+            "customKeys":"custom_k1;custom_k2",
+            "customValues":"60;100M",
+            "where":"and d_name='路由器03' and d_ip='192.168.0.111'",
+        }
+
+        -->
+    </DBUpdate>
+
+    <DBScript id="1" connId="conn_01" fileUrl="d:\tmp\db_tmp\initsql.sql" isRun="true">
+    </DBScript>
+
+    <DBConnection id="conn_011" dbType="mysql" dbURL="127.0.0.1:3306" database="db2" username="root" password="mysql" maxIdleConns="5" maxOpenConns="10" connMaxLifetime="300"   />
+    <DBConnection id="conn_01" dbType="sqlite3" database="d:/tmp/db_tmp/sqlite3.db"  maxIdleConns="5" maxOpenConns="10" connMaxLifetime="300" />
+
+
+</DBTemplate>

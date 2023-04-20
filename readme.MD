@@ -55,8 +55,8 @@ dbtemplate -fileUrl dbtemplate.xml
 
 
 ```
-### go client调用
-参看example目录
+### grpc协议调用
+[参看样本](https://github.com/hw2499/dbtemplate/tree/main/service/hwgrpcclient)
 
 ## 接口说明
 - http协议
@@ -65,7 +65,7 @@ dbtemplate -fileUrl dbtemplate.xml
   接口入参 jsondata 
   接口出参 jsondata结果集
 - grpc协议
-
+  [参看样本](https://github.com/hw2499/dbtemplate/tree/main/service/hwgrpcclient)
 
 ## 配置文件说明
 
