@@ -1,0 +1,17 @@
+syntax = "proto3";
+package logic;
+option go_package = "./;hwgrpc";
+
+//请求参数
+message CommonInputRequest{
+  string InputJsonString = 1;
+}
+//输出信息
+message CommonOutputResponse{
+  string OutputJsonString =1;
+}
+
+//服务service定义
+service CommonService{
+  rpc CallCommonMethod(CommonInputRequest) returns (CommonOutputResponse);
+}
