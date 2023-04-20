@@ -60,10 +60,10 @@ dbtemplate -fileUrl dbtemplate.xml
 
 ## 接口说明
 - http协议
-  调用方式 POST
-  接口名称 postCommonMethod
-  接口入参 jsondata 
-  接口出参 jsondata结果集
+  <br>调用方式 POST
+  <br>接口名称 postCommonMethod
+  <br>接口入参 jsondata 
+  <br>接口出参 jsondata结果集
 - grpc协议
   [参看样本](https://github.com/hw2499/dbtemplate/tree/main/service/hwgrpcclient)
 
