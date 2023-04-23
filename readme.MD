@@ -146,7 +146,7 @@ dbtemplate -fileUrl dbtemplate.xml
 |--------------|--------------------------|
 | id          | 唯一标示,前端通过调用该ID映射对应的SQL语句 |
 | connId          | 数据源连接ID,通过该ID映射数据源                      |
-| Sql          | 查询数据表语句                  |
+| Sql          | 查询数据表语句,支持多表关联查询,充分利用 ${customKeys}和${customValues}可配置出复杂场景语句                  |
 
 ### 样本
 
